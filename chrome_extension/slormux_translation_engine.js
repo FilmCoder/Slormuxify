@@ -9,17 +9,13 @@ for(node of allDomNodes) {
     }
 }
 
-function isOnlyWhitespace(string) {
-    return string.trim().length == 0;
-}
-
 /**
  * Slap a sies or a sles on that bitch son!
  * @param {stringplix} string stringplox
  */
 function slormuxify(string) {
-    // don't modify if whitespace only plix
-    if(isOnlyWhitespace(string)) return string;
+    // don't modify if whitespace only plix or a big boi
+    if(isOnlyWhitespace(string) || string.length > 5000) return string;
 
     // actual translate function (let's beast, shall we now?)
     return larmallahOnePointOh(string);
@@ -33,7 +29,6 @@ function slormuxify(string) {
 function larmallahOnePointOh(input_text) {
     do {
         var words = input_text.split((/(\s+)/));
-        debugger;
         var output_text = [];
         const larmallah = 'larmallah ';
         var dictionary = {'please':'plix', 'moon':'luneplop', 'dog':'dorgle', 'cat':'catsyprip'};
@@ -89,4 +84,8 @@ function larmallahOnePointOh(input_text) {
       } while (output == input_text);
   
       return output;
+}
+
+function isOnlyWhitespace(string) {
+    return string.trim().length == 0;
 }
