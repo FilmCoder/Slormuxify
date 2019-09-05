@@ -1,8 +1,18 @@
-const allDomNodes = document.getElementsByTagName('*');
+// this is usually named content.js, but that's no swag
+
+// set up storage of variable for whether the translator is on or off
+// basically, if it's not set yet, default it to on
+chrome.storage.local.get(STORAGE_KEYS.IS_ON, (result) => {
+    if(_.isEmpty(result)) {
+        chrome.storage.local.set({[STORAGE_KEYS.IS_ON]: true});
+    }
+})
+
 
 // traverse all text nodes and run the translate function on them
-for(node of allDomNodes) {
-    for(child of node.childNodes) {
+const allDomElements = document.getElementsByTagName('*');
+for(element of allDomElements) {
+    for(child of element.childNodes) {
         if(child.nodeType == Node.TEXT_NODE) {
             child.data = slormuxify(child.data);
         }
@@ -28,7 +38,7 @@ function slormuxify(string) {
  */
 function larmallahOnePointOh(input_text) {
     do {
-        var words = input_text.split((/(\s+)/));
+        var words = input_text.split((/(\s+)/)); // split on all types of whitespace
         var output_text = [];
         const larmallah = 'larmallah ';
         var dictionary = {'please':'plix', 'moon':'luneplop', 'dog':'dorgle', 'cat':'catsyprip'};
@@ -84,8 +94,4 @@ function larmallahOnePointOh(input_text) {
       } while (output == input_text);
   
       return output;
-}
-
-function isOnlyWhitespace(string) {
-    return string.trim().length == 0;
 }
