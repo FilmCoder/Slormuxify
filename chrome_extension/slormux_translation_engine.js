@@ -8,6 +8,13 @@ chrome.storage.local.get(STORAGE_KEYS.IS_ON, (result) => {
     }
 })
 
+// TODO: new way to store with convenience wrappers, not yet tested
+// Store.get(STORAGE_KEYS.IS_ON).then(val => {
+//     if(val == undefined) {
+//         Store.set(STORAGE_KEYS.IS_ON, true);
+//     }
+// })
+
 
 // traverse all text nodes and run the translate function on them
 const allDomElements = document.getElementsByTagName('*');
