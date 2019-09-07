@@ -15,3 +15,4 @@ Get the Extension Running in Chrome
 Developmentzorz Tipsies
 ---------------------------
 * Everytime changes are made in the code, at `chrome://extensions/` click the refresh symbol on the Slormuxify extension box.  Then go to a page where you're running the extension, refresh, and you should see your changes.
+* Just take an unassigned issue, and assign it to yourself.  Branch off of master, do the issue on your feature branch, then submit a pull request to merge into master. You can @ me (FilmCoder) and I'll make sure to get your changes in asap.
