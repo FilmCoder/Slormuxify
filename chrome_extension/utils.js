@@ -1,4 +1,4 @@
-const STORAGE_KEYS = {
+const ENUMS = {
     IS_ON: "IS_ON",
 }
 
@@ -12,7 +12,6 @@ function isOnlyWhitespace(string) {
 class Store {
     /**
      * Gets a promise resolving the value from Chrome local storage by key.
-     * 
      * @example
      *  // returns the value associated with the key 'myKey'
      *  Store.get('myKey').then(value => {
@@ -39,11 +38,16 @@ class Store {
      * Returns a promise resolving once the supplied key-value is set in Chrome local storage
      * @example
      *  Store.set({leGril: 'Momo'}).then(() => console.log('finished storing value'))
+     * 
+     * @example
+     *  let value = await Store.set({swag: 'over9000'});
+     * 
+     * @returns the value that was set
      */
     static set = (key, val) => {
         return new Promise(resolve => {
-            chrome.storage.local.set({[key]: val}, result => {
-                resolve(result);
+            chrome.storage.local.set({[key]: val}, () => {
+                resolve(val);
             })
         })
     }
@@ -51,8 +55,8 @@ class Store {
 
 // placeholder test
 // TODO: remove
-var isOn = new Promise(resolve => {
-    chrome.storage.local.get(STORAGE_KEYS.IS_ON, result => {
-        resolve(result[STORAGE_KEYS.IS_ON]);
-    })
-});
+// var isOn = new Promise(resolve => {
+//     chrome.storage.local.get(STORAGE_KEYS.IS_ON, result => {
+//         resolve(result[STORAGE_KEYS.IS_ON]);
+//     })
+// });

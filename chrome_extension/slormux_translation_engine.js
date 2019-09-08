@@ -2,28 +2,36 @@
 
 // set up storage of variable for whether the translator is on or off
 // basically, if it's not set yet, default it to on
-chrome.storage.local.get(STORAGE_KEYS.IS_ON, (result) => {
-    if(_.isEmpty(result)) {
-        chrome.storage.local.set({[STORAGE_KEYS.IS_ON]: true});
-    }
-})
-
-// TODO: new way to store with convenience wrappers, not yet tested
-// Store.get(STORAGE_KEYS.IS_ON).then(val => {
-//     if(val == undefined) {
-//         Store.set(STORAGE_KEYS.IS_ON, true);
+// chrome.storage.local.get(ENUMS.IS_ON, (result) => {
+//     if(_.isEmpty(result)) {
+//         chrome.storage.local.set({[ENUMS.IS_ON]: true});
 //     }
 // })
 
+/**
+ * Initial tasks to perform for the content script.  This script has direct
+ * access to the webpage's DOM.
+ */
+async function init() {
+    // ensure the key which keeps track of whether translator is on or off
+    // defaults to "true" (on) initially
+    if(await Store.get(ENUMS.IS_ON) == undefined) {
+        await Store.set(ENUMS.IS_ON, true);
+    }
+    slormuxifyAllTextNodes();
+}
+init();
 
 // traverse all text nodes and run the translate function on them
-const allDomElements = document.getElementsByTagName('*');
-for(element of allDomElements) {
-    for(child of element.childNodes) {
-        if(child.nodeType == Node.TEXT_NODE) {
-            child.data = slormuxify(child.data);
+function slormuxifyAllTextNodes() {
+    const allDomElements = document.getElementsByTagName('*');
+    for(element of allDomElements) {
+        for(child of element.childNodes) {
+            if(child.nodeType == Node.TEXT_NODE) {
+                child.data = slormuxify(child.data);
+            }
         }
-    }
+    }    
 }
 
 /**
