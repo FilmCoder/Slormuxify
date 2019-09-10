@@ -2,10 +2,6 @@ const ENUMS = {
     IS_ON: "IS_ON",
 }
 
-function isOnlyWhitespace(string) {
-    return string.trim().length == 0;
-}
-
 /**
  * Conventient promise-based utility for working with Chrome local storage.
  */
@@ -48,6 +44,15 @@ class Store {
         return new Promise(resolve => {
             chrome.storage.local.set({[key]: val}, () => {
                 resolve(val);
+            })
+        })
+    }
+
+    // Return true if key exists, false if not present.
+    static has = key => {
+        return new Promise(resolve => {
+            chrome.storage.local.get(key, val => {
+                resolve(!_.isEmpty(val));
             })
         })
     }

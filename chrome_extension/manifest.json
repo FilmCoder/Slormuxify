@@ -10,7 +10,8 @@
             "js": [
                 "libraries/lodash-core.min.js",
                 "utils.js",
-                "slormux_translation_engine.js"
+                "translators.js",
+                "slormux_engine.js"
             ]
         }
     ],

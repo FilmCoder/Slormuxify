@@ -1,38 +1,5 @@
-// this is usually named content.js, but that's no swag
-
-// set up storage of variable for whether the translator is on or off
-// basically, if it's not set yet, default it to on
-// chrome.storage.local.get(ENUMS.IS_ON, (result) => {
-//     if(_.isEmpty(result)) {
-//         chrome.storage.local.set({[ENUMS.IS_ON]: true});
-//     }
-// })
-
-/**
- * Initial tasks to perform for the content script.  This script has direct
- * access to the webpage's DOM.
- */
-async function init() {
-    // ensure the key which keeps track of whether translator is on or off
-    // defaults to "true" (on) initially
-    if(await Store.get(ENUMS.IS_ON) == undefined) {
-        await Store.set(ENUMS.IS_ON, true);
-    }
-    slormuxifyAllTextNodes();
-}
-init();
-
-// traverse all text nodes and run the translate function on them
-function slormuxifyAllTextNodes() {
-    const allDomElements = document.getElementsByTagName('*');
-    for(element of allDomElements) {
-        for(child of element.childNodes) {
-            if(child.nodeType == Node.TEXT_NODE) {
-                child.data = slormuxify(child.data);
-            }
-        }
-    }    
-}
+// translators.js contains actual string manipulation functions to convert 
+// English to Slormux
 
 /**
  * Slap a sies or a sles on that bitch son!
@@ -109,4 +76,12 @@ function larmallahOnePointOh(input_text) {
       } while (output == input_text);
   
       return output;
+}
+
+function isOnlyWhitespace(string) {
+    return string.trim().length == 0;
+}
+
+module.exports = {
+    slormuxify: slormuxify,
 }
