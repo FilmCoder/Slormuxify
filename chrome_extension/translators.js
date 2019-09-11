@@ -19,8 +19,18 @@ function slormuxify(string) {
  * @param {string} input_text plox plox!
  */
 function larmallahOnePointOh(input_text) {
+
+    // attempt translation 5 times, until output is different from input
+    // this is to ensure that at least 1 word was slormuxified
+    var out;
+    var i = 0;
     do {
-        var words = input_text.split((/(\s+)/)); // split on all types of whitespace
+        out = translate(input_text);
+    } while(out == input_text && i < 5);
+    return out;
+
+    function translate(input_text) {
+        var words = input_text.split(/(\w+)/); // split on all types of whitespace
         var output_text = [];
         const larmallah = 'larmallah ';
         var dictionary = {'please':'plix', 'moon':'luneplop', 'dog':'dorgle', 'cat':'catsyprip'};
@@ -28,8 +38,8 @@ function larmallahOnePointOh(input_text) {
             const num = Math.random();
             var lastChar = word.substr(word.length - 1);
             var word_length = word.length - 1;
-  
-            if(isOnlyWhitespace(word)) {
+    
+            if(isOnlyWhitespace(word) || isOnlyPunctuation(word)) {
                 // chill out, don't slap a sies on nothin feel me shawdee?
             }
             else if (word in dictionary) {
@@ -61,25 +71,23 @@ function larmallahOnePointOh(input_text) {
             else if (num > 0.77) {
                 word = word.concat('sies');
             }
-  
+    
             if (word.charAt(word_length) == ',') {
                 word = word.replace(',','');
                 word = word.concat(',');
             }
             output_text.push(word);
-  
-        }
-        output = output_text.join(' ');
-  
-        // if the output hasn't been changed at all, run algorithm again
-        // until it's changed
-      } while (output == input_text);
-  
-      return output;
+        }    
+        return output_text.join('');
+    }  
 }
 
 function isOnlyWhitespace(string) {
     return string.trim().length == 0;
+}
+
+function isOnlyPunctuation(string) {
+     return !/\w+/.test(string);
 }
 
 module.exports = {
