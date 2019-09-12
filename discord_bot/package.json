@@ -11,7 +11,7 @@
     "push-to-ocean": "git push ocean master",
     "deploy-docker-container": "npm install && docker kill plorglebot || true && docker rm plorglebot || true && docker build -t plorglebot --build-arg plorglebot_token=${plorglebot_token} -f ./Dockerfile .. && docker run -d --name plorglebot plorglebot:latest"
   },
-  "author": "The bb's",
+  "author": "The bb'sies",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.5.1"
