@@ -22,7 +22,7 @@ client.on('message', message => {
     if(message.author.id != client.user.id) {
         if(hasAny(message.content, ['plorx'])) {
             var slormuxedMessage = translators.slormuxify(message.content);
-            message.channel.send(slormuxedMessage);        
+            message.channel.send(slormuxedMessage);      
         }
     }
 });
