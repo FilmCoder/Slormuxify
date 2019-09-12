@@ -20,10 +20,23 @@ const client = new Discord.Client();
 // Create an event listener for messages
 client.on('message', message => {
     if(message.author.id != client.user.id) {
-        var slormuxedMessage = translators.slormuxify(message.content);
-        message.channel.send(slormuxedMessage);    
+        if(hasAny(message.content, ['plorx'])) {
+            var slormuxedMessage = translators.slormuxify(message.content);
+            message.channel.send(slormuxedMessage);        
+        }
     }
 });
 
 // Log our bot in using the token from https://discordapp.com/developers/applications/me
 client.login(token);
+
+/**
+ * Returns true if any strings in array are in "string"
+ * @param {String} string 
+ * @param {Array} array 
+ */
+function hasAny(string, array) {
+    return array.some(elem => {
+        return string.includes(elem);
+    })
+}
