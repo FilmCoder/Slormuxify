@@ -5,7 +5,7 @@
   "main": "index_plorgle.js",
   "scripts": {
     "start-server": "node index_plorgle.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy-docker-container": "docker kill plorglebot || true && docker rm plorglebot || true && docker build -t plorglebot --build-arg plorglebot_token=${plorglebot_token} -f ./Dockerfile .. && docker run -d --name plorglebot plorglebot:latest"
   },
   "author": "The bb's",
   "license": "ISC",
