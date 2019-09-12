@@ -2,6 +2,12 @@ Slormuxify
 ==========
 "Hey man, what's up?" -> "Hizorz, bb, what's ploxin?" - Chrome extension to Slormuxify all text on your browser, on the fly.
 
+It's SPRING TIME BOIS
+---------------------
+* time to get core functionality of the discord bot complete, don't focus anymore on polish
+* time to get basic features of chrome extension working as well
+* then we will publish to chrome store!
+
 Get the Extension Running in Chrome
 -----------------------------------
 1. Install git-lfs: https://git-lfs.github.com/
