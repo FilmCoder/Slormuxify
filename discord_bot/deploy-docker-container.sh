@@ -11,12 +11,12 @@ npm install
 docker kill plorglebot || true 
 docker rm plorglebot || true
 
-# build new image for plorglebot
+echo "build new image for plorglebot"
 docker build -t plorglebot --build-arg plorglebot_token=${plorglebot_token} -f ./Dockerfile ..
 
-# run that bad boy
+echo "run that bad boy"
 docker run -d --name plorglebot plorglebot:latest
 
-# clean up any dangling images.  it makes a new image on each build so we need to clean these
-# up, otherwise we'll run out of server space
+echo "clean up any dangling images.  it makes a new image on each build so we need to clean these"
+echo "up, otherwise we'll run out of server space"
 docker image prune --force
