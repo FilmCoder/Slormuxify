@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# this is a post receive git hook. there should be a bare git repo of slormuxify on the
+# build server. this should be put in its "hooks" folder.
+
+while read oldrev newrev ref
+do
+    if [[ $ref =~ .*/master$ ]];
+    then
+        echo "Post receive hook on digital ocean master triggered. Building and running docker image "
+        echo "with running discord bot."
+        echo "PATH: $PATH"
+
+		# this is dumb as hell, for some reason the PATH here isn't synched up to the system
+		# path, have no idea why, but it's necessary to add this because we use snap a lot
+		PATH=${PATH}:/snap/bin
+
+		# we must checkout a copy of the repository, then deploy it to docker
+		app_dir=~/plorglespace/
+		rm -rf $app_dir
+		git clone . $app_dir
+		cd ${app_dir}/discord_bot
+		bash ./deploy-docker-container.sh
+    fi
+done
