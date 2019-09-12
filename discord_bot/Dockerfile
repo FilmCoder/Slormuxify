@@ -1,4 +1,4 @@
-# expects a context at the root level of the Slormuxify repo. 
+# expects a context at the root level of the Slormuxify repo..
 
 FROM node:slim
 ARG plorglebot_token
