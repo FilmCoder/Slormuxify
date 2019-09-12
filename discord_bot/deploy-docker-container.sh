@@ -5,7 +5,7 @@
 # to discord.
 
 # note: A few commands have "|| true", this prevents them from crashing the entire script
-# if they error out. swag.
+# if they error out. swag. ay.
 
 npm install 
 docker kill plorglebot || true 
