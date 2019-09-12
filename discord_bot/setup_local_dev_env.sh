@@ -1,4 +1,5 @@
 #!/bin/bash
+#### run this script on your local development machine ####
 
 # add git remote for the digital ocean server, can then do:
 #   > git push ocean master
