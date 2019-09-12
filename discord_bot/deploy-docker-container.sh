@@ -18,5 +18,5 @@ docker image prune --force
 echo "build new image for plorglebot"
 docker build -t plorglebot --build-arg plorglebot_token=${plorglebot_token} -f ./Dockerfile ..
 
-echo "run that bad boy"
+echo "run that bad boy huh"
 docker run -d --name plorglebot plorglebot:latest
