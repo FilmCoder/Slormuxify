@@ -7,6 +7,10 @@
 # note: A few commands have "|| true", this prevents them from crashing the entire script
 # if they error out. swag. ay.
 
+# need to make sure plorglebot_token is read in
+source ~/.bash_profile
+echo "plorglebot_token is: ${plorglebot_token}"
+
 npm install 
 docker kill plorglebot || true 
 docker rm plorglebot || true
