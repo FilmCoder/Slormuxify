@@ -14,19 +14,50 @@ async function init() {
 
     // only slormuxify the page if engine is currently on
     if(await Store.get(ENUMS.IS_ON)) {
-        slormuxifyAllTextNodes();
+        await slormuxifyAllTextNodes();
     }
+
+    chrome.runtime.onMessage.addListener(
+        function (request, sender, sendResponse) {
+            if(request.isEngineOn) {
+                console.log('slormux engine is turning ON');
+                slormuxifyAllTextNodes()
+            } 
+            else if(request.isEngineOn == false) {
+                console.log('slormux engine is turning OFF')
+                deSlormuxifyAllTextNodes()
+            }
+        }
+    );
 }
 init();
 
-// traverse all text nodes and run the translate function on them
-function slormuxifyAllTextNodes() {
-    const allDomElements = document.getElementsByTagName('*');
-    for(element of allDomElements) {
-        for(child of element.childNodes) {
-            if(child.nodeType == Node.TEXT_NODE) {
-                child.data = slormuxify(child.data);
+async function slormuxifyAllTextNodes() {
+    await forAllTextNodes((node) => {
+        node.preslormuxify_data = node.data;
+        node.data = slormuxify(node.data);
+    })
+}
+
+async function deSlormuxifyAllTextNodes() {
+    await forAllTextNodes((node) => {
+        node.data = node.preslormuxify_data;
+    })
+}
+
+/**
+ * Returns promise that will execute 'func' on all text nodes on the web page.
+ */
+function forAllTextNodes(func) {
+    return new Promise(resolve => {
+        const allDomElements = document.getElementsByTagName('*');
+        for(element of allDomElements) {
+            for(child of element.childNodes) {
+                if(child.nodeType == Node.TEXT_NODE) {
+                    func(child);
+                }
             }
         }
-    }    
+        resolve();
+    })
 }
