@@ -5,7 +5,8 @@
 // Import the discord.js module
 const Discord = require('discord.js');
 const translators = require('../chrome_extension/translators');
-utils = require('./utils');
+const utils = require('./utils');
+const axios = require('axios');
 
 // ensure discord token is defined
 const token = process.env.plorglebot_token;
@@ -26,10 +27,19 @@ client.on('message', message => {
     pauser.handleMessage(message);
     if(pauser.paused) return;
 
-    if(message.author.id != client.user.id) {
+    if(message.author.id != client.user.id && message.content[0] != '!') {
+        // if you type a message with 'plorx' return what you said slormuxified
         if(utils.hasAny(message.content, ['plorx'])) {
             var slormuxedMessage = translators.slormuxify(message.content);
             message.channel.send(slormuxedMessage);      
+        }
+        // if you mentioned plorglebot by name, have him send a deep quote
+        else if(utils.hasAny(message.content.toLowerCase(), ['plorglebot'])) {
+            axios.get('https://api.quotable.io/random').then(resp => {
+                let quote = resp.data.content;
+                let author = resp.data.author;
+                message.channel.send(translators.slormuxify(`"${quote}" - ${author}`))
+            })
         }
     }
 });
