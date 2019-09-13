@@ -3,7 +3,15 @@
     "version": "1.0",
     "description": "Step aside English. Slormuxify was built at its core to be the happiest (and silliest) language on Earth and to promote love, tolerance, and swag.",
     "manifest_version": 2,
-    "permissions": ["storage"],
+    "permissions": [
+        "storage"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],

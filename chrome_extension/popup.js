@@ -3,8 +3,10 @@ async function toggleTranslator() {
     await Store.set(ENUMS.IS_ON, !isOn);
     updateHeading();
 
+    // we need to let the slormux_engine content script running on the current
+    // tab that it needs to process the webpage
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { isEngineOn: !isOn })
+        chrome.tabs.sendMessage(tabs[0].id, { processDOM: true })
     });
 }
 

@@ -25,14 +25,17 @@ async function init() {
 
     // listen for message from popup ui to turn engine on or off
     chrome.runtime.onMessage.addListener(
-        function (request, sender, sendResponse) {
-            if(request.isEngineOn) {
-                slormuxifyAllTextNodes();
-                dynamicEngine.start();
-            } 
-            else if(request.isEngineOn == false) {
-                deSlormuxifyAllTextNodes();
-                dynamicEngine.stop();
+        async function (request, sender, sendResponse) {
+            if(request.hasOwnProperty('processDOM')) {
+                let isOn = await Store.get(ENUMS.IS_ON);
+                if(isOn) {
+                    slormuxifyAllTextNodes();
+                    dynamicEngine.start();
+                } 
+                else {
+                    deSlormuxifyAllTextNodes();
+                    dynamicEngine.stop();
+                }
             }
         }
     );
