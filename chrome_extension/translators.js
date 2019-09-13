@@ -20,13 +20,17 @@ function slormuxify(string) {
  */
 function larmallahOnePointOh(input_text) {
 
-    // attempt translation 5 times, until output is different from input
+    // attempt translation 3 times, until output is different from input
     // this is to ensure that at least 1 word was slormuxified
+    // also, there are probably some infinite possible loops it could get stuck
+    // in (like if it was passed only whitespace) and this will limit that to 3 
+    // iterations.
     var out;
     var i = 0;
     do {
+        i++;
         out = translate(input_text);
-    } while(out == input_text && i < 5);
+    } while(out == input_text && i < 3);
     return out;
 
     function translate(input_text) {
@@ -57,7 +61,9 @@ function larmallahOnePointOh(input_text) {
                 }
             }
             else if (num > 0.97) {
-                word = larmallah.concat(word).concat('bar');
+                // The old "larmballah xbar" is too much for many users
+                //word = larmallah.concat(word).concat('bar');
+                word = word.concat('gles');
             }
             else if (num > 0.92) {
                 word = word.concat('bles');
@@ -90,6 +96,10 @@ function isOnlyPunctuation(string) {
      return !/\w+/.test(string);
 }
 
-module.exports = {
-    slormuxify: slormuxify,
+// only export node module if this is being run in nodejs.  We can detect if running
+// in nodejs by ensuring "module" is defined
+if(typeof module !== 'undefined') {
+    module.exports = {
+        slormuxify: slormuxify,
+    }
 }

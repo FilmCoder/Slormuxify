@@ -11,7 +11,11 @@ async function init() {
     if(!await Store.has(ENUMS.IS_ON)) {
         await Store.set(ENUMS.IS_ON, true);
     }
-    slormuxifyAllTextNodes();
+
+    // only slormuxify the page if engine is currently on
+    if(await Store.get(ENUMS.IS_ON)) {
+        slormuxifyAllTextNodes();
+    }
 }
 init();
 
