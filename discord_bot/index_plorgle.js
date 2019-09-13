@@ -4,7 +4,8 @@
 
 // Import the discord.js module
 const Discord = require('discord.js');
-const translators = require('../chrome_extension/translators')
+const translators = require('../chrome_extension/translators');
+utils = require('./utils');
 
 // ensure discord token is defined
 const token = process.env.plorglebot_token;
@@ -16,11 +17,17 @@ if(!token) {
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
+let pauser = new utils.Pauser();
+let info = new utils.Info(pauser);
 
 // Create an event listener for messages
 client.on('message', message => {
+    info.handleMessage(message);
+    pauser.handleMessage(message);
+    if(pauser.paused) return;
+
     if(message.author.id != client.user.id) {
-        if(hasAny(message.content, ['plorx'])) {
+        if(utils.hasAny(message.content, ['plorx'])) {
             var slormuxedMessage = translators.slormuxify(message.content);
             message.channel.send(slormuxedMessage);      
         }
@@ -29,14 +36,3 @@ client.on('message', message => {
 
 // Log our bot in using the token from https://discordapp.com/developers/applications/me
 client.login(token);
-
-/**
- * Returns true if any strings in array are in "string"
- * @param {String} string 
- * @param {Array} array 
- */
-function hasAny(string, array) {
-    return array.some(elem => {
-        return string.includes(elem);
-    })
-}
