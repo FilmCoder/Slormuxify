@@ -33,6 +33,10 @@ client.on('message', message => {
             var slormuxedMessage = translators.slormuxify(message.content);
             message.channel.send(slormuxedMessage);      
         }
+        else if(utils.hasAny(message.content, ['funny joke'])) {
+            message.channel.send("You are gay.");
+            message.channel.send("Funny joke!");      
+        }
         // if you mentioned plorglebot by name, have him send a deep quote
         else if(utils.hasAny(message.content.toLowerCase(), ['plorglebot'])) {
             axios.get('https://api.quotable.io/random').then(resp => {
