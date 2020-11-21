@@ -37,7 +37,7 @@ function larmallahOnePointOh(input_text) {
         var words = input_text.split(/(\w+)/); // split on all types of whitespace
         var output_text = [];
         const larmallah = 'larmallah ';
-        var dictionary = {'please':'plix', 'moon':'luneplop', 'dog':'dorgle', 'cat':'catsyprip'};
+        var dictionary = {'please':'plix', 'moon':'luneplop', 'dog':'dorgle', 'cat':'catsyprip', 'good':'anime', 'jayanth':'The Borgler', 'sun':'solardix', 'butt':'backborbs', 'ass': backborbs', 'milky way':'milkies', 'friends':'beebs', 'hanging out': 'muxin', 'hang out':'mux', 'borgle':'mess up'};
         for (word of words) {
             const num = Math.random();
             var lastChar = word.substr(word.length - 1);
