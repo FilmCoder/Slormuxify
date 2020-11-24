@@ -11,6 +11,21 @@ exports.hasAny = function(string, array) {
     })
 }
 
+/**
+ * Returns the the parts of the string after the n'th space (1st space is 0, 2nd 1, etc...)
+ * @param {*} n Return rest of string after space n
+ * @param {*} string Input string
+ * @example
+ *   afterSpaceN(1, 'one two three four') => 'three four'
+ */
+exports.afterSpaceN = function(n, string) {
+    let occurence = -1;
+    for(let i=0; i < string.length; i++) {
+        if(string[i] == ' ') occurence += 1;
+        if(occurence == n) return string.slice(i + 1, string.length);
+    }
+}
+
 exports.Pauser = class {
     constructor() {
         this.paused = false;
