@@ -60,8 +60,7 @@ client.on('message', message => {
                 message.channel.send(slormuxedMessage);      
             }
             else if(utils.hasAny(message.content, ['funny joke'])) {
-                message.channel.send("You are gay.");
-                message.channel.send("Funny joke!");      
+                message.channel.send(":funnyjoke:");     
             }
             // if you mentioned plorglebot by name, have him send a deep quote
             else if(utils.hasAny(message.content.toLowerCase(), ['plorglebot'])) {
