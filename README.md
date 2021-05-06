@@ -26,7 +26,7 @@ Chrome Extension Developmentzorz Tipsies
 
 Discord Bot (PlorgleBot) development workflow
 ---------------------------------------------
-1. Type "!plorglebot status" on discord in private chat to get the status of all running plorglebots
+1. Type "!plorglebot report" on discord in private chat to get the status of all running plorglebots
 2. There's probably a plorglebot running on linux, you want to pause that one so you can run your own locally and it doesn't conflict with the one on the server.  On discord private chat type "!plorglebot pause". You can unpause it later with "!plorglebot unpause"
 3. Install VSCode
 4. cd into "discord_bot"
