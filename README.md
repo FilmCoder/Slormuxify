@@ -4,7 +4,7 @@ Slormuxify
 
 CURRENT NEWS
 ---------------------
-* UPDATE SEP 26 2019: no one has stepped up to help me so this project is now dormant.
+* This project is now dormant.
 * submitted to *chrome store*, we've been accepted! We LIVE BAYBE: https://chrome.google.com/webstore/search/slormuxify
 * core functionality of discord bot complete, discord bot live on bentscrew and website complete, which can be found here: https://filmcoder.github.io/Slormuxify/
 * CURRENTLY LOOKING FOR HELP: we need to improve the discord bot.  more things it can do.  better translation.  more clever.  i'm a little burnt out for now so i'll be stepping back but if someone would like to contribute that would be much appreciated.  thus far it's been 100% me solo.  below are instructions to get the chrome extension and discord bot running.
